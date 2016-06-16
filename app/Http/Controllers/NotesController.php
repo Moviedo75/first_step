@@ -14,4 +14,16 @@ class NotesController extends Controller
     	$notes = Note::all();
     	return view('notes/list', compact('notes'));
     }
+
+    public function create(){
+    	return view('notes/create');
+    }
+    //procesar la creacion de la nota
+    public function store(){
+    	return 'Creating a note';
+    }
+
+    public function show($note){
+    	dd($note);
+    }
 }
