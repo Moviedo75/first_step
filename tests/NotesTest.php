@@ -26,10 +26,28 @@ class NotesTest extends TestCase
     }
 
     public function test_create_note(){
-        //Route::post('notes')
-        //when el usuario haga una peticion post para crear notas en la vista notes
-        $this->post('notes')
+        //when
+        //Cuando se visita la pagina notes
+        $this->visit('notes')
             //then
-            ->see('Creating a note');
+            //cuando le damos click al link Add a note
+            ->click('Add a note')
+            //vamos hacer llevados a una pagina en la ruta 'notes/create'
+            ->seePageIs('notes/create')
+            //Vamos a ver un texto Create a note
+            ->see('Create a note')
+            //vamos a poder escribir
+            ->type('A new note', 'note')
+            //al presionar el botono create note
+            ->press('create note')
+            //vamos hacer lleavados a la pagina 'notes'
+            ->seePageIs('notes')
+            //podemos ver un texto 
+            ->see('A new note')
+            //Vamos a tener esa nota registrada en la base de datos
+            ->seeInDatabase('notes', [
+                    'note' => 'A new note'
+                ]);
+
     }
 }
